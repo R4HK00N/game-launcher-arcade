@@ -1,0 +1,15 @@
+C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\DAE\DAE\bin\Debug\net6.0\DAE.exe
+C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\DAE\DAE\bin\Debug\net6.0\DAE.deps.json
+C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\DAE\DAE\bin\Debug\net6.0\DAE.runtimeconfig.json
+C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\DAE\DAE\bin\Debug\net6.0\DAE.dll
+C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\DAE\DAE\bin\Debug\net6.0\DAE.pdb
+C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\DAE\DAE\obj\Debug\net6.0\DAE.csproj.AssemblyReference.cache
+C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\DAE\DAE\obj\Debug\net6.0\DAE.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\DAE\DAE\obj\Debug\net6.0\DAE.AssemblyInfoInputs.cache
+C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\DAE\DAE\obj\Debug\net6.0\DAE.AssemblyInfo.cs
+C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\DAE\DAE\obj\Debug\net6.0\DAE.csproj.CoreCompileInputs.cache
+C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\DAE\DAE\obj\Debug\net6.0\DAE.dll
+C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\DAE\DAE\obj\Debug\net6.0\refint\DAE.dll
+C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\DAE\DAE\obj\Debug\net6.0\DAE.pdb
+C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\DAE\DAE\obj\Debug\net6.0\DAE.genruntimeconfig.cache
+C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\DAE\DAE\obj\Debug\net6.0\ref\DAE.dll
