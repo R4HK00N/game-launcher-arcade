@@ -26,10 +26,14 @@ public class NewGameDetector : MonoBehaviour
     public string selectedGameInfoshortDescription;
     public string[] selectedGameInfoFullDescription;
     [Space(20)]
-    public Image coverImage;
-    public TextMeshProUGUI nameDisplay;
-    public TextMeshProUGUI authorDisplay;
-    public TextMeshProUGUI genreDisplay;
+    [SerializeField] List<Image> coverImages;
+    //debugging
+    //
+    //[Space(20)]
+    //public Image coverImage;
+    //public TextMeshProUGUI nameDisplay;
+    //public TextMeshProUGUI authorDisplay;
+    //public TextMeshProUGUI genreDisplay;
 
     private void Start()
     {
@@ -113,12 +117,20 @@ public class NewGameDetector : MonoBehaviour
         selectedGameInfoshortDescription = gameInfo[shortDescription];
         selectedGameInfoFullDescription = GetFullGameDescription(gameInfo);
 
-        Texture2D spriteTexture = gamecovers[selectedGameFolder];
+        for (int j = 0; j < coverImages.Count - 1; j++)
+        {
+            Texture2D spriteTexture = gamecovers[selectedGameFolder + j];
+            coverImages[j].sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
+        }
 
-        coverImage.sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
-        nameDisplay.text = selectedGameInfoName;
-        authorDisplay.text = selectedGameInfoAuthors;
-        genreDisplay.text = selectedGameInfoGenre;
+        //testscene display
+        //
+        //Texture2D spriteTexture = gamecovers[selectedGameFolder];
+        //
+        //coverImage.sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
+        //nameDisplay.text = selectedGameInfoName;
+        //authorDisplay.text = selectedGameInfoAuthors;
+        //genreDisplay.text = selectedGameInfoGenre;
     }
 
     public void PlaySelectedGame()
