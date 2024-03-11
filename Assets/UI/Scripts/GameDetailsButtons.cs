@@ -6,12 +6,14 @@ public class GameDetailsButtons : MonoBehaviour
 {
     public GameObject gameBrowser;
     public GameObject gameDetails;
+    public NewGameDetector newGameDetector;
     public bool goBackToBrowser;
 
     public void GameClick()
     {
         gameDetails.SetActive(true);
         gameBrowser.SetActive(false);
+        newGameDetector.DisplayGameInfo();
     }
     public void OnGoBack()
     {

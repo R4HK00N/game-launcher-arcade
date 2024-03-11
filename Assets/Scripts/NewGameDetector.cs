@@ -26,13 +26,17 @@ public class NewGameDetector : MonoBehaviour
     public string selectedGameInfoshortDescription;
     public string[] selectedGameInfoFullDescription;
     [Space(20)]
+    [SerializeField] GameObject gamebrowser;
+    [SerializeField] GameObject gamedetails;
+    [Space(20)]
+    [Header("Browser")]
+    [SerializeField] Image highLightedGameCover;
     [SerializeField] List<Image> coverImages;
-    //debugging
-    //
-    //[Space(20)]
+    [Space(20)]
+    [Header("Details")]
     //public Image coverImage;
-    //public TextMeshProUGUI nameDisplay;
-    //public TextMeshProUGUI authorDisplay;
+    public TextMeshProUGUI nameDisplay;
+    public TextMeshProUGUI authorDisplay;
     //public TextMeshProUGUI genreDisplay;
 
     private void Start()
@@ -107,7 +111,7 @@ public class NewGameDetector : MonoBehaviour
         DisplayGameInfo();
     }
 
-    void DisplayGameInfo()
+    public void DisplayGameInfo()
     {
         string[] gameInfo = GetGameInfo(selectedGameFolder);
         selectedGameInfoExecutable = gameInfo[executable];
@@ -117,20 +121,28 @@ public class NewGameDetector : MonoBehaviour
         selectedGameInfoshortDescription = gameInfo[shortDescription];
         selectedGameInfoFullDescription = GetFullGameDescription(gameInfo);
 
-        for (int j = 0; j < coverImages.Count - 1; j++)
+        //gamebrowser
+        if (gamebrowser.activeSelf)
         {
-            Texture2D spriteTexture = gamecovers[selectedGameFolder + j];
-            coverImages[j].sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
-        }
 
-        //testscene display
-        //
-        //Texture2D spriteTexture = gamecovers[selectedGameFolder];
-        //
-        //coverImage.sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
-        //nameDisplay.text = selectedGameInfoName;
-        //authorDisplay.text = selectedGameInfoAuthors;
-        //genreDisplay.text = selectedGameInfoGenre;
+            Texture2D spriteTextureOfHighlight = gamecovers[selectedGameFolder];
+            highLightedGameCover.sprite = Sprite.Create(spriteTextureOfHighlight, new Rect(0, 0, spriteTextureOfHighlight.width, spriteTextureOfHighlight.height), new Vector2(0, 0));
+
+            for (int j = 0; j < coverImages.Count - 1; j++)
+            {
+                Texture2D spriteTexture = gamecovers[selectedGameFolder + j];
+                coverImages[j].sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
+            }
+        }
+        else if (gamedetails.activeSelf)
+        {
+            Texture2D spriteTexture = gamecovers[selectedGameFolder];
+
+            //coverImage.sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
+            nameDisplay.text = selectedGameInfoName;
+            authorDisplay.text = selectedGameInfoAuthors;
+            //genreDisplay.text = selectedGameInfoGenre;
+        }
     }
 
     public void PlaySelectedGame()
