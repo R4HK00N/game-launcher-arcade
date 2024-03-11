@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using TMPro;
+using UnityEngine.UI;
+using System.Diagnostics;
 
 public class NewGameDetector : MonoBehaviour
 {
     [SerializeField] string gamesPath;
     public List<string> gamefolders;
+    public List<Texture2D> gamecovers;
     int executable = 0;
     int gameName = 1;
     int authors = 2;
@@ -15,32 +19,22 @@ public class NewGameDetector : MonoBehaviour
     int fullDesprictionAlinea = 4;
     [Space(20)]
     [SerializeField] int selectedGameFolder;
-    int prevSelectedGameFolder = -1;
     public string selectedGameInfoExecutable;
     public string selectedGameInfoName;
     public string selectedGameInfoAuthors;
     public string selectedGameInfoGenre;
     public string selectedGameInfoshortDescription;
     public string[] selectedGameInfoFullDescription;
+    [Space(20)]
+    public Image coverImage;
+    public TextMeshProUGUI nameDisplay;
+    public TextMeshProUGUI authorDisplay;
+    public TextMeshProUGUI genreDisplay;
 
     private void Start()
     {
         RefreshGameLibrary();
-    }
-
-    public void Update()
-    {
-        if (prevSelectedGameFolder != selectedGameFolder)
-        {
-            prevSelectedGameFolder = selectedGameFolder;
-            string[] gameInfo = GetGameInfo(selectedGameFolder);
-            selectedGameInfoExecutable = gameInfo[executable];
-            selectedGameInfoName = gameInfo[gameName];
-            selectedGameInfoAuthors = gameInfo[authors];
-            selectedGameInfoGenre = gameInfo[genre];
-            selectedGameInfoshortDescription = gameInfo[shortDescription];
-            selectedGameInfoFullDescription = GetFullGameDescription(gameInfo);
-        }
+        DisplayGameInfo();
     }
 
     public void RefreshGameLibrary()
@@ -51,8 +45,17 @@ public class NewGameDetector : MonoBehaviour
             if (File.Exists(Path.Combine(gamefolder, "GAME-INFO.txt")))
             {
                 string[] gameInfo = File.ReadAllLines(Path.Combine(gamefolder, "GAME-INFO.txt"));
-                gamefolders.Add(gamefolder);
+                if (File.Exists(Path.Combine(gamefolder, "cover.png")))
+                {
+                    string path = Path.Combine(gamefolder, "cover.png");
+                    byte[] bytes = File.ReadAllBytes(path);
 
+                    Texture2D loadTexture = new Texture2D(1, 1);
+                    loadTexture.LoadImage(bytes);
+
+                    gamecovers.Add(loadTexture);
+                }
+                gamefolders.Add(gamefolder);
             }
         }
     }
@@ -70,5 +73,58 @@ public class NewGameDetector : MonoBehaviour
             response[i] = gameInfo[i + 4];
         }
         return response;
+    }
+
+    public void SwitchGame(bool skipForward)
+    {
+        if (skipForward)
+        {
+            if (selectedGameFolder < gamefolders.Count - 1)
+            {
+                selectedGameFolder++;
+            }
+            else
+            {
+                selectedGameFolder = 0;
+            }
+        }
+        else if (!skipForward)
+        {
+            if (selectedGameFolder > 0)
+            {
+                selectedGameFolder--;
+            }
+            else
+            {
+                selectedGameFolder = gamefolders.Count - 1;
+            }
+        }
+
+        DisplayGameInfo();
+    }
+
+    void DisplayGameInfo()
+    {
+        string[] gameInfo = GetGameInfo(selectedGameFolder);
+        selectedGameInfoExecutable = gameInfo[executable];
+        selectedGameInfoName = gameInfo[gameName];
+        selectedGameInfoAuthors = gameInfo[authors];
+        selectedGameInfoGenre = gameInfo[genre];
+        selectedGameInfoshortDescription = gameInfo[shortDescription];
+        selectedGameInfoFullDescription = GetFullGameDescription(gameInfo);
+
+        Texture2D spriteTexture = gamecovers[selectedGameFolder];
+
+        coverImage.sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
+        nameDisplay.text = selectedGameInfoName;
+        authorDisplay.text = selectedGameInfoAuthors;
+        genreDisplay.text = selectedGameInfoGenre;
+    }
+
+    public void PlaySelectedGame()
+    {
+        string gamePath = Path.Combine(gamefolders[selectedGameFolder], selectedGameInfoExecutable);
+
+        Process.Start(gamePath);
     }
 }
