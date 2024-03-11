@@ -56,4 +56,12 @@ public class OpenAdmin : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(gamesButton);
         }
     }
+    public void CanGoBackToBrowser()
+    {
+        canGoBackAdmin = true;
+    }
+    public void CanNotGoBackToBrowser()
+    {
+        canGoBackAdmin = false;
+    }
 }
