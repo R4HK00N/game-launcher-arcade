@@ -12,6 +12,7 @@ public class NewGameDetector : MonoBehaviour
     [SerializeField] string gamesPath;
     public List<string> gamefolders;
     public List<Texture2D> gamecovers;
+    public List<Texture2D> gamebanners;
     int executable = 0;
     int gameName = 1;
     int authors = 2;
@@ -44,7 +45,7 @@ public class NewGameDetector : MonoBehaviour
     private void Start()
     {
         RefreshGameLibrary();
-        DisplayGameInfo(null);
+        DisplayGameInfo(0);
     }
 
     public void RefreshGameLibrary()
@@ -64,6 +65,16 @@ public class NewGameDetector : MonoBehaviour
                     loadTexture.LoadImage(bytes);
 
                     gamecovers.Add(loadTexture);
+                }
+                if (File.Exists(Path.Combine(gamefolder, "banner.png")))
+                {
+                    string path = Path.Combine(gamefolder, "banner.png");
+                    byte[] bytes = File.ReadAllBytes(path);
+
+                    Texture2D loadTexture = new Texture2D(1, 1);
+                    loadTexture.LoadImage(bytes);
+
+                    gamebanners.Add(loadTexture);
                 }
                 gamefolders.Add(gamefolder);
             }
@@ -110,23 +121,12 @@ public class NewGameDetector : MonoBehaviour
             }
         }
 
-        DisplayGameInfo(null);
+        DisplayGameInfo(0);
     }
 
-    public void DisplayGameInfo(string indexString)
+    public void DisplayGameInfo(int index)
     {
-        if (indexString == null)
-        {
-
-        }
-        else if (indexString == "Highlight Button")
-        {
-            selectedGameFolder = 0;
-        }
-        else
-        {
-            selectedGameFolder = Int32.Parse(indexString);
-        }
+        selectedGameFolder = index;
 
         string[] gameInfo = GetGameInfo(selectedGameFolder);
         selectedGameInfoExecutable = gameInfo[executable];
@@ -146,14 +146,14 @@ public class NewGameDetector : MonoBehaviour
             {
                 Texture2D spriteTexture = gamecovers[selectedGameFolder + j];
                 coverImages[j].sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
-                coverImages[j].gameObject.name = j.ToString();
+                coverImages[j].gameObject.GetComponent<ButtonInfo>().SetIndex(j);
             }
         }
         else if (gamedetails.activeSelf)
         {
-            Texture2D spriteTexture = gamecovers[selectedGameFolder];
+            Texture2D spriteTexture = gamebanners[selectedGameFolder];
 
-            //coverImage.sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
+            bannerImage.sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
             nameDisplay.text = selectedGameInfoName;
             authorDisplay.text = selectedGameInfoAuthors;
             descriptionDisplay.text = ""; //clear all text

@@ -1042,6 +1042,7 @@ GameObject:
   - component: {fileID: 235299954}
   - component: {fileID: 235299953}
   - component: {fileID: 235299955}
+  - component: {fileID: 235299956}
   m_Layer: 5
   m_Name: DownMiddleGameHolster
   m_TagString: Untagged
@@ -1163,6 +1164,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &235299956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235299951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 036b39eed5063b64b9d807c367035260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &235334806
 GameObject:
   m_ObjectHideFlags: 0
@@ -1451,6 +1464,7 @@ GameObject:
   - component: {fileID: 318137667}
   - component: {fileID: 318137666}
   - component: {fileID: 318137665}
+  - component: {fileID: 318137670}
   m_Layer: 5
   m_Name: Highlight Button
   m_TagString: Untagged
@@ -1617,6 +1631,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &318137670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318137664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 036b39eed5063b64b9d807c367035260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &324221614
 GameObject:
   m_ObjectHideFlags: 0
@@ -1766,6 +1792,7 @@ GameObject:
   - component: {fileID: 379889479}
   - component: {fileID: 379889478}
   - component: {fileID: 379889481}
+  - component: {fileID: 379889483}
   m_Layer: 5
   m_Name: UpperLeftGameHolster
   m_TagString: Untagged
@@ -1932,6 +1959,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 379889477}
   m_CullTransparentMesh: 1
+--- !u!114 &379889483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379889477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 036b39eed5063b64b9d807c367035260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &387851579
 GameObject:
   m_ObjectHideFlags: 0
@@ -3543,6 +3582,7 @@ MonoBehaviour:
   gamesPath: C:\Users\schak\Documents\programming\projects\game-launcher-arcade\GamesLibary
   gamefolders: []
   gamecovers: []
+  gamebanners: []
   selectedGameFolder: 0
   selectedGameInfoExecutable: 
   selectedGameInfoName: 
@@ -3772,6 +3812,7 @@ GameObject:
   - component: {fileID: 799347390}
   - component: {fileID: 799347389}
   - component: {fileID: 799347391}
+  - component: {fileID: 799347392}
   m_Layer: 5
   m_Name: DownLeftGameHolster
   m_TagString: Untagged
@@ -3893,6 +3934,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &799347392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799347387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 036b39eed5063b64b9d807c367035260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &812830629
 GameObject:
   m_ObjectHideFlags: 0
@@ -4713,6 +4766,7 @@ GameObject:
   - component: {fileID: 1062266703}
   - component: {fileID: 1062266702}
   - component: {fileID: 1062266701}
+  - component: {fileID: 1062266705}
   m_Layer: 5
   m_Name: DownRightGameHolster
   m_TagString: Untagged
@@ -4834,6 +4888,18 @@ RectTransform:
   m_AnchoredPosition: {x: 622.9994, y: -964}
   m_SizeDelta: {x: 480, y: 270}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1062266705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062266700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 036b39eed5063b64b9d807c367035260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1102545471
 GameObject:
   m_ObjectHideFlags: 0
@@ -5776,6 +5842,7 @@ GameObject:
   - component: {fileID: 1499813165}
   - component: {fileID: 1499813164}
   - component: {fileID: 1499813167}
+  - component: {fileID: 1499813169}
   m_Layer: 5
   m_Name: UpperMiddleGameHolster
   m_TagString: Untagged
@@ -5942,6 +6009,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1499813163}
   m_CullTransparentMesh: 1
+--- !u!114 &1499813169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499813163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 036b39eed5063b64b9d807c367035260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1502896464
 GameObject:
   m_ObjectHideFlags: 0
@@ -6515,6 +6594,7 @@ GameObject:
   - component: {fileID: 1582474386}
   - component: {fileID: 1582474385}
   - component: {fileID: 1582474388}
+  - component: {fileID: 1582474390}
   m_Layer: 5
   m_Name: UpperRightGameHolster
   m_TagString: Untagged
@@ -6681,6 +6761,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582474384}
   m_CullTransparentMesh: 1
+--- !u!114 &1582474390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582474384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 036b39eed5063b64b9d807c367035260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1674215834
 GameObject:
   m_ObjectHideFlags: 0
@@ -8311,6 +8403,7 @@ MonoBehaviour:
   gamesPath: C:\Users\schak\Documents\programming\projects\game-launcher-arcade\GamesLibary
   gamefolders: []
   gamecovers: []
+  gamebanners: []
   selectedGameFolder: 0
   selectedGameInfoExecutable: 
   selectedGameInfoName: 
@@ -8328,7 +8421,7 @@ MonoBehaviour:
   - {fileID: 799347389}
   - {fileID: 235299953}
   - {fileID: 1062266702}
-  bannerImage: {fileID: 0}
+  bannerImage: {fileID: 1690515264}
   nameDisplay: {fileID: 139856030}
   authorDisplay: {fileID: 1319435745}
   descriptionDisplay: {fileID: 955235265}

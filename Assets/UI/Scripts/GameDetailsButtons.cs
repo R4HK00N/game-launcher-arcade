@@ -14,7 +14,7 @@ public class GameDetailsButtons : MonoBehaviour
     {
         gameDetails.SetActive(true);
         gameBrowser.SetActive(false);
-        newGameDetector.DisplayGameInfo(EventSystem.current.currentSelectedGameObject.name);
+        newGameDetector.DisplayGameInfo(EventSystem.current.currentSelectedGameObject.GetComponent<ButtonInfo>().GetIndex());
     }
     public void OnGoBack()
     {
