@@ -2041,7 +2041,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 579949404}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1503293311}
+        m_TargetAssemblyTypeName: GameDetailsButtons, Assembly-CSharp
+        m_MethodName: GameClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &579949404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2236,6 +2248,9 @@ MonoBehaviour:
   selectedGameInfoGenre: 
   selectedGameInfoshortDescription: 
   selectedGameInfoFullDescription: []
+  gamebrowser: {fileID: 0}
+  gamedetails: {fileID: 0}
+  highLightedGameCover: {fileID: 0}
   coverImages:
   - {fileID: 628393202}
   - {fileID: 1453498687}
@@ -2243,6 +2258,8 @@ MonoBehaviour:
   - {fileID: 1395058085}
   - {fileID: 1008787831}
   - {fileID: 1111029544}
+  nameDisplay: {fileID: 0}
+  authorDisplay: {fileID: 0}
 --- !u!1 &620347950
 GameObject:
   m_ObjectHideFlags: 0
@@ -2485,7 +2502,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 628393202}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1503293311}
+        m_TargetAssemblyTypeName: GameDetailsButtons, Assembly-CSharp
+        m_MethodName: GameClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &628393202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3987,7 +4016,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1008787831}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1503293311}
+        m_TargetAssemblyTypeName: GameDetailsButtons, Assembly-CSharp
+        m_MethodName: GameClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1008787831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4396,7 +4437,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1111029544}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1503293311}
+        m_TargetAssemblyTypeName: GameDetailsButtons, Assembly-CSharp
+        m_MethodName: GameClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1111029544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4939,7 +4992,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1395058085}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1503293311}
+        m_TargetAssemblyTypeName: GameDetailsButtons, Assembly-CSharp
+        m_MethodName: GameClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1395058085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5333,7 +5398,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1453498687}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1503293311}
+        m_TargetAssemblyTypeName: GameDetailsButtons, Assembly-CSharp
+        m_MethodName: GameClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1453498687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6010,6 +6087,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameBrowser: {fileID: 609804488}
   gameDetails: {fileID: 270265063}
+  newGameDetector: {fileID: 0}
   goBackToBrowser: 0
 --- !u!1 &1534731319
 GameObject:
