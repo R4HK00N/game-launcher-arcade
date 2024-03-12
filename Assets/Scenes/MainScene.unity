@@ -2327,8 +2327,8 @@ RectTransform:
   - {fileID: 1302421717}
   - {fileID: 1319435744}
   - {fileID: 1571083336}
-  - {fileID: 955235264}
   - {fileID: 542403166}
+  - {fileID: 955235264}
   m_Father: {fileID: 1829339554}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2686,7 +2686,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 436777619}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.031229174, y: 0.3502963}
   m_AnchorMax: {x: 0.15, y: 0.3908148}
@@ -3552,7 +3552,7 @@ MonoBehaviour:
   selectedGameInfoFullDescription: []
   gamebrowser: {fileID: 0}
   gamedetails: {fileID: 0}
-  highLightedGameCover: {fileID: 0}
+  highLightedGameCover: {fileID: 318137667}
   coverImages:
   - {fileID: 379889479}
   - {fileID: 1499813165}
@@ -3560,8 +3560,10 @@ MonoBehaviour:
   - {fileID: 799347389}
   - {fileID: 235299953}
   - {fileID: 1062266702}
+  bannerImage: {fileID: 0}
   nameDisplay: {fileID: 0}
   authorDisplay: {fileID: 0}
+  descriptionDisplay: {fileID: 0}
 --- !u!114 &768587372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4227,7 +4229,7 @@ GameObject:
   - component: {fileID: 955235266}
   - component: {fileID: 955235265}
   m_Layer: 5
-  m_Name: DescriptionText
+  m_Name: DescriptionDes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4246,7 +4248,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 436777619}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.031229174, y: 0.040703706}
   m_AnchorMax: {x: 0.9776459, y: 0.33544445}
@@ -8326,8 +8328,10 @@ MonoBehaviour:
   - {fileID: 799347389}
   - {fileID: 235299953}
   - {fileID: 1062266702}
+  bannerImage: {fileID: 0}
   nameDisplay: {fileID: 139856030}
   authorDisplay: {fileID: 1319435745}
+  descriptionDisplay: {fileID: 955235265}
 --- !u!4 &1999103165
 Transform:
   m_ObjectHideFlags: 0

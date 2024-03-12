@@ -34,9 +34,10 @@ public class NewGameDetector : MonoBehaviour
     [SerializeField] List<Image> coverImages;
     [Space(20)]
     [Header("Details")]
-    //public Image coverImage;
+    public Image bannerImage;
     public TextMeshProUGUI nameDisplay;
     public TextMeshProUGUI authorDisplay;
+    public TextMeshProUGUI descriptionDisplay;
     //public TextMeshProUGUI genreDisplay;
 
     private void Start()
@@ -141,6 +142,18 @@ public class NewGameDetector : MonoBehaviour
             //coverImage.sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
             nameDisplay.text = selectedGameInfoName;
             authorDisplay.text = selectedGameInfoAuthors;
+            descriptionDisplay.text = ""; //clear all text
+            for (int l = 0; l < selectedGameInfoFullDescription.Length - 1; l++)
+            {
+                if (l == 0)
+                {
+                    descriptionDisplay.text = selectedGameInfoFullDescription[l];
+                }
+                else
+                {
+                    descriptionDisplay.text += $"<br>{selectedGameInfoFullDescription[l]}";
+                }
+            }
             //genreDisplay.text = selectedGameInfoGenre;
         }
     }
