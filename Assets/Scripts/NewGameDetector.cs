@@ -5,6 +5,7 @@ using System.IO;
 using TMPro;
 using UnityEngine.UI;
 using System.Diagnostics;
+using System;
 
 public class NewGameDetector : MonoBehaviour
 {
@@ -43,7 +44,7 @@ public class NewGameDetector : MonoBehaviour
     private void Start()
     {
         RefreshGameLibrary();
-        DisplayGameInfo();
+        DisplayGameInfo(null);
     }
 
     public void RefreshGameLibrary()
@@ -109,11 +110,24 @@ public class NewGameDetector : MonoBehaviour
             }
         }
 
-        DisplayGameInfo();
+        DisplayGameInfo(null);
     }
 
-    public void DisplayGameInfo()
+    public void DisplayGameInfo(string indexString)
     {
+        if (indexString == null)
+        {
+
+        }
+        else if (indexString == "Highlight Button")
+        {
+            selectedGameFolder = 0;
+        }
+        else
+        {
+            selectedGameFolder = Int32.Parse(indexString);
+        }
+
         string[] gameInfo = GetGameInfo(selectedGameFolder);
         selectedGameInfoExecutable = gameInfo[executable];
         selectedGameInfoName = gameInfo[gameName];
@@ -125,7 +139,6 @@ public class NewGameDetector : MonoBehaviour
         //gamebrowser
         if (gamebrowser.activeSelf)
         {
-
             Texture2D spriteTextureOfHighlight = gamecovers[selectedGameFolder];
             highLightedGameCover.sprite = Sprite.Create(spriteTextureOfHighlight, new Rect(0, 0, spriteTextureOfHighlight.width, spriteTextureOfHighlight.height), new Vector2(0, 0));
 
@@ -133,6 +146,7 @@ public class NewGameDetector : MonoBehaviour
             {
                 Texture2D spriteTexture = gamecovers[selectedGameFolder + j];
                 coverImages[j].sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
+                coverImages[j].gameObject.name = j.ToString();
             }
         }
         else if (gamedetails.activeSelf)

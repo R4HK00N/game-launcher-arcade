@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameDetailsButtons : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class GameDetailsButtons : MonoBehaviour
     {
         gameDetails.SetActive(true);
         gameBrowser.SetActive(false);
-        newGameDetector.DisplayGameInfo();
+        newGameDetector.DisplayGameInfo(EventSystem.current.currentSelectedGameObject.name);
     }
     public void OnGoBack()
     {
