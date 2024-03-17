@@ -17,7 +17,7 @@ public class GameDetailsButtons : MonoBehaviour
         animator.SetTrigger("ScrollUp");
         gameDetails.SetActive(true);
         gameBrowser.SetActive(false);
-        //newGameDetector.DisplayGameInfo(EventSystem.current.currentSelectedGameObject.GetComponent<ButtonInfo>().GetIndex());
+        newGameDetector.DisplayGameInfo(EventSystem.current.currentSelectedGameObject.GetComponent<ButtonInfo>().GetIndex());
         EventSystem.current.SetSelectedGameObject(playButton);
     }
     public void OnGoBack()
