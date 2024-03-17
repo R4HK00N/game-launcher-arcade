@@ -144,6 +144,10 @@ public class NewGameDetector : MonoBehaviour
 
             for (int j = 0; j < coverImages.Count - 1; j++)
             {
+                if (j > gamefolders.Count - 1)
+                {
+                    return;
+                }    
                 Texture2D spriteTexture = gamecovers[selectedGameFolder + j];
                 coverImages[j].sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
                 coverImages[j].gameObject.GetComponent<ButtonInfo>().SetIndex(j);
