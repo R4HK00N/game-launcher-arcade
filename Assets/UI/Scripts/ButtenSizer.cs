@@ -7,6 +7,7 @@ public class ButtenSizer : MonoBehaviour
 {
     public Vector3 startButtonSize;
     public GameObject buttonSelectHighlight;
+    public bool doSelectHighlight;
 
     public void Start()
     {
@@ -14,12 +15,18 @@ public class ButtenSizer : MonoBehaviour
     }
     public void SelectButton()
     {
-        buttonSelectHighlight.SetActive(true);
         transform.localScale *= 1.1f;
+        if (doSelectHighlight == true)
+        {
+            buttonSelectHighlight.SetActive(true);
+        }
     }
     public void DeselectButton()
     {
-        buttonSelectHighlight.SetActive(false);
         transform.localScale = startButtonSize;
+        if (doSelectHighlight == true)
+        {
+            buttonSelectHighlight.SetActive(false);
+        }
     }
 }

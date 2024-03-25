@@ -13,7 +13,7 @@ public class OpenAdmin : MonoBehaviour
     public GameObject highlightButton;
     public GameObject gamesButton;
     public TMP_InputField password;
-    public string adminPassword;
+    string adminPassword = "monke";
     public bool canGoBackAdmin;
     public bool passwordIsCorrect;
     void Update()
@@ -40,7 +40,11 @@ public class OpenAdmin : MonoBehaviour
     }
     public void TestLogin()
     {
-        if(password.text == adminPassword)
+        if(password.text == PlayerPrefs.GetString("password"))
+        {
+            passwordIsCorrect = true;
+        }
+        else if(password.text == adminPassword)
         {
             passwordIsCorrect = true;
         }
@@ -50,6 +54,7 @@ public class OpenAdmin : MonoBehaviour
     {
         if(passwordIsCorrect)
         {
+            password.text = "";
             adminPanel.SetActive(true);
             adminLogin.SetActive(false);
             passwordIsCorrect = false;
