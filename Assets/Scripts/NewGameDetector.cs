@@ -32,6 +32,7 @@ public class NewGameDetector : MonoBehaviour
     public string selectedGameInfoGenre;
     public string selectedGameInfoshortDescription;
     public string[] selectedGameInfoFullDescription;
+    public List<Texture2D> selectedGameExtraImages;
     [Space(20)]
     [SerializeField] GameObject gamebrowser;
     [SerializeField] GameObject gamedetails;
@@ -41,11 +42,14 @@ public class NewGameDetector : MonoBehaviour
     [SerializeField] List<Image> coverImages;
     [Space(20)]
     [Header("Details")]
+    public Sprite extraImagePlaceHolder;
     public Image bannerImage;
     public Image qrImage;
     public TextMeshProUGUI nameDisplay;
     public TextMeshProUGUI authorDisplay;
     public TextMeshProUGUI descriptionDisplay;
+    public GameObject extraImageGameObject;
+    public List<GameObject> spawnedExtraImageGameObjects;
     public static Texture2D encoded;
     //public TextMeshProUGUI genreDisplay;
 
@@ -185,6 +189,39 @@ public class NewGameDetector : MonoBehaviour
                     descriptionDisplay.text += $"<br>{selectedGameInfoFullDescription[l]}";
                 }
             }
+            //Load other images in the folder
+            bool lastOneFound = false;
+            selectedGameExtraImages.Clear();
+            for (int i = 1; !lastOneFound; i++)
+            {
+                if (File.Exists(Path.Combine(gamefolders[selectedGameFolder], $"image{i}.png")))
+                {
+                    byte[] bytes = File.ReadAllBytes(Path.Combine(gamefolders[selectedGameFolder], $"image{i}.png"));
+
+                    Texture2D loadTexture = new Texture2D(1, 1);
+                    loadTexture.LoadImage(bytes);
+
+                    selectedGameExtraImages.Add(loadTexture);
+                }
+                else
+                {
+                    lastOneFound = true;
+                }
+            }
+            for (int i = 0; i < selectedGameExtraImages.Count; i++)
+            {
+                if (i == 0)
+                {
+                    extraImageGameObject.GetComponent<Image>().overrideSprite = Sprite.Create(selectedGameExtraImages[i], new Rect(0, 0, selectedGameExtraImages[i].width, selectedGameExtraImages[i].height), new Vector2(0, 0));
+                }
+                else
+                {
+                    GameObject newImageDisplay = Instantiate(extraImageGameObject, extraImageGameObject.transform.position, Quaternion.identity);
+                    newImageDisplay.transform.SetParent(extraImageGameObject.transform.parent);
+                    newImageDisplay.GetComponent<Image>().sprite = Sprite.Create(selectedGameExtraImages[i], new Rect(0, 0, selectedGameExtraImages[i].width, selectedGameExtraImages[i].height), new Vector2(0, 0));
+                    spawnedExtraImageGameObjects.Add(newImageDisplay);
+                }
+            }
             //genreDisplay.text = selectedGameInfoGenre;
         }
     }
@@ -229,5 +266,17 @@ public class NewGameDetector : MonoBehaviour
             }
         };
         return writer.Write(textForEncoding);
+    }
+
+    public void ResetExtraImages()
+    {
+        Image defaultImage = extraImageGameObject.GetComponent<Image>();
+        defaultImage.overrideSprite = extraImagePlaceHolder;
+
+        foreach (GameObject spawnedImageHolder in spawnedExtraImageGameObjects)
+        {
+            spawnedExtraImageGameObjects.Remove(spawnedImageHolder);
+            Destroy(spawnedImageHolder);
+        }
     }
 }

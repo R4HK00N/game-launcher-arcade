@@ -22,7 +22,9 @@ public class GameDetailsButtons : MonoBehaviour
     }
     public void OnGoBack()
     {
-        if(goBackToBrowser)
+        newGameDetector.ResetExtraImages();
+
+        if (goBackToBrowser)
         {
             gameDetails.SetActive(false);
             gameBrowser.SetActive(true);
