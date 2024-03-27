@@ -6,6 +6,9 @@ using TMPro;
 using UnityEngine.UI;
 using System.Diagnostics;
 using System;
+using QRCodeGenerator23;
+using ZXing;
+using ZXing.QrCode;
 
 public class NewGameDetector : MonoBehaviour
 {
@@ -15,14 +18,16 @@ public class NewGameDetector : MonoBehaviour
     public List<Texture2D> gamebanners;
     int executable = 0;
     int gameName = 1;
-    int authors = 2;
-    int genre = 3;
-    int shortDescription = 4;
-    int fullDesprictionAlinea = 4;
+    int gameLink = 2;
+    int authors = 3;
+    int genre = 4;
+    int shortDescription = 5;
+    int fullDesprictionAlinea = 5;
     [Space(20)]
     [SerializeField] int selectedGameFolder;
     public string selectedGameInfoExecutable;
     public string selectedGameInfoName;
+    public string selectedGameInfoLink;
     public string selectedGameInfoAuthors;
     public string selectedGameInfoGenre;
     public string selectedGameInfoshortDescription;
@@ -37,9 +42,11 @@ public class NewGameDetector : MonoBehaviour
     [Space(20)]
     [Header("Details")]
     public Image bannerImage;
+    public Image qrImage;
     public TextMeshProUGUI nameDisplay;
     public TextMeshProUGUI authorDisplay;
     public TextMeshProUGUI descriptionDisplay;
+    public static Texture2D encoded;
     //public TextMeshProUGUI genreDisplay;
 
     private void Start()
@@ -91,11 +98,12 @@ public class NewGameDetector : MonoBehaviour
         string[] response = new string[gameInfo.Length - fullDesprictionAlinea + 1];
         for (int i = 0; i < response.Length - 1; i++)
         {
-            response[i] = gameInfo[i + 4];
+            response[i] = gameInfo[i + shortDescription];
         }
         return response;
     }
 
+    //This function is for a debugging scene
     public void SwitchGame(bool skipForward)
     {
         if (skipForward)
@@ -131,6 +139,7 @@ public class NewGameDetector : MonoBehaviour
         string[] gameInfo = GetGameInfo(selectedGameFolder);
         selectedGameInfoExecutable = gameInfo[executable];
         selectedGameInfoName = gameInfo[gameName];
+        selectedGameInfoLink = gameInfo[gameLink];
         selectedGameInfoAuthors = gameInfo[authors];
         selectedGameInfoGenre = gameInfo[genre];
         selectedGameInfoshortDescription = gameInfo[shortDescription];
@@ -142,7 +151,7 @@ public class NewGameDetector : MonoBehaviour
             Texture2D spriteTextureOfHighlight = gamecovers[selectedGameFolder];
             highLightedGameCover.sprite = Sprite.Create(spriteTextureOfHighlight, new Rect(0, 0, spriteTextureOfHighlight.width, spriteTextureOfHighlight.height), new Vector2(0, 0));
 
-            for (int j = 0; j < coverImages.Count - 1; j++)
+            for (int j = 0; j < coverImages.Count; j++)
             {
                 if (j > gamefolders.Count - 1)
                 {
@@ -158,6 +167,10 @@ public class NewGameDetector : MonoBehaviour
             Texture2D spriteTexture = gamebanners[selectedGameFolder];
 
             bannerImage.sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
+            if (selectedGameInfoLink != "")
+            {
+                GenerateQROutput(selectedGameInfoLink);
+            }
             nameDisplay.text = selectedGameInfoName;
             authorDisplay.text = selectedGameInfoAuthors;
             descriptionDisplay.text = ""; //clear all text
@@ -176,10 +189,45 @@ public class NewGameDetector : MonoBehaviour
         }
     }
 
+    public void LoadNextLibraryWindow()
+    {
+        DisplayGameInfo(selectedGameFolder + coverImages.Count);
+    }
+
     public void PlaySelectedGame()
     {
         string gamePath = Path.Combine(gamefolders[selectedGameFolder], selectedGameInfoExecutable);
 
         Process.Start(gamePath);
+    }
+
+    // For generating the QRCode Image
+    public void GenerateQROutput(string link)
+    {
+        encoded = new Texture2D(312, 312);
+        var textForEncoding = link;
+        if (textForEncoding != null)
+        {
+            var color32 = Encode(textForEncoding, encoded.width, encoded.height);
+            encoded.SetPixels32(color32);
+            encoded.Apply();
+        }
+
+        qrImage.sprite = Sprite.Create(encoded, new Rect(0, 0, encoded.width, encoded.height), Vector2.zero);
+    }
+
+    // For generating QRCode
+    public static Color32[] Encode(string textForEncoding, int width, int height)
+    {
+        var writer = new BarcodeWriter
+        {
+            Format = BarcodeFormat.QR_CODE,
+            Options = new QrCodeEncodingOptions
+            {
+                Height = height,
+                Width = width
+            }
+        };
+        return writer.Write(textForEncoding);
     }
 }
