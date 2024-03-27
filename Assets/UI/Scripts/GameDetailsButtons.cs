@@ -9,12 +9,14 @@ public class GameDetailsButtons : MonoBehaviour
     public GameObject gameBrowser;
     public GameObject gameDetails;
     public GameObject playButton;
+    public GameObject highlightButton;
     public NewGameDetector newGameDetector;
     public bool goBackToBrowser;
 
     public void GameClick()
     {
         animator.SetTrigger("ScrollUp");
+        EventSystem.current.SetSelectedGameObject(playButton);
         gameDetails.SetActive(true);
         gameBrowser.SetActive(false);
         newGameDetector.DisplayGameInfo(EventSystem.current.currentSelectedGameObject.GetComponent<ButtonInfo>().GetIndex());

@@ -20,18 +20,18 @@ public class OpenAdmin : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode. Minus))
         {
+            EventSystem.current.SetSelectedGameObject(loginButton);
             adminLogin.SetActive(true);
             gameBrowser.SetActive(false);
-            EventSystem.current.SetSelectedGameObject(loginButton);
         }
     }
     public void OnGoBack()
     {
         if(canGoBackAdmin)
         {
+            EventSystem.current.SetSelectedGameObject(highlightButton);
             adminLogin.SetActive(false);
             gameBrowser.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(highlightButton);
         }
     }
     public void SetLoginButtonSelected()
@@ -54,11 +54,11 @@ public class OpenAdmin : MonoBehaviour
     {
         if(passwordIsCorrect)
         {
+            EventSystem.current.SetSelectedGameObject(gamesButton);
             password.text = "";
             adminPanel.SetActive(true);
             adminLogin.SetActive(false);
             passwordIsCorrect = false;
-            EventSystem.current.SetSelectedGameObject(gamesButton);
         }
     }
     public void CanGoBackToBrowser()
