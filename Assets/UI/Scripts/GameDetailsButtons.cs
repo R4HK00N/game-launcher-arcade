@@ -10,17 +10,25 @@ public class GameDetailsButtons : MonoBehaviour
     public GameObject gameDetails;
     public GameObject playButton;
     public GameObject highlightButton;
+    public UpAndDownAnimation upAndDownAnimation;
     public NewGameDetector newGameDetector;
     public bool goBackToBrowser;
 
+    public void Update()
+    {
+        if(EventSystem.current.currentSelectedGameObject == playButton)
+        {
+            animator.SetTrigger("ScrollUp");
+            upAndDownAnimation.CanScrollDown();
+            upAndDownAnimation.scrolledDown = false;
+        }
+    }
     public void GameClick()
     {
-        animator.SetTrigger("ScrollUp");
         EventSystem.current.SetSelectedGameObject(playButton);
         gameDetails.SetActive(true);
         gameBrowser.SetActive(false);
         newGameDetector.DisplayGameInfo(EventSystem.current.currentSelectedGameObject.GetComponent<ButtonInfo>().GetIndex());
-        EventSystem.current.SetSelectedGameObject(playButton);
     }
     public void OnGoBack()
     {
@@ -30,6 +38,7 @@ public class GameDetailsButtons : MonoBehaviour
         {
             gameDetails.SetActive(false);
             gameBrowser.SetActive(true);
+            upAndDownAnimation.CanNotScrollDown();
         }
     }
     public void CanGoBackToBrowser()
