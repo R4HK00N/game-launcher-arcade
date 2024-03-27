@@ -64,37 +64,54 @@ public class NewGameDetector : MonoBehaviour
         gamefolders.Clear();
         foreach (string gamefolder in Directory.GetDirectories(gamesPath))
         {
-            if (File.Exists(Path.Combine(gamefolder, "GAME-INFO.txt")))
+            if (IsValidGameFolder(gamefolder))
             {
                 string[] gameInfo = File.ReadAllLines(Path.Combine(gamefolder, "GAME-INFO.txt"));
-                if (File.Exists(Path.Combine(gamefolder, "cover.png")))
-                {
-                    string path = Path.Combine(gamefolder, "cover.png");
-                    byte[] bytes = File.ReadAllBytes(path);
 
-                    Texture2D loadTexture = new Texture2D(1, 1);
-                    loadTexture.LoadImage(bytes);
+                string coverPath = Path.Combine(gamefolder, "cover.png");
+                byte[] coverBytes = File.ReadAllBytes(coverPath);
 
-                    gamecovers.Add(loadTexture);
-                }
-                if (File.Exists(Path.Combine(gamefolder, "banner.png")))
-                {
-                    string path = Path.Combine(gamefolder, "banner.png");
-                    byte[] bytes = File.ReadAllBytes(path);
+                Texture2D loadCoverTexture = new Texture2D(1, 1);
+                loadCoverTexture.LoadImage(coverBytes);
 
-                    Texture2D loadTexture = new Texture2D(1, 1);
-                    loadTexture.LoadImage(bytes);
+                gamecovers.Add(loadCoverTexture);
 
-                    gamebanners.Add(loadTexture);
-                }
+
+                string bannerPath = Path.Combine(gamefolder, "banner.png");
+                byte[] bannerBytes = File.ReadAllBytes(bannerPath);
+
+                Texture2D loadBannerTexture = new Texture2D(1, 1);
+                loadBannerTexture.LoadImage(bannerBytes);
+
+                gamebanners.Add(loadBannerTexture);
+
                 gamefolders.Add(gamefolder);
             }
         }
     }
 
-    public string[] GetGameInfo(int requestedInfo)
+    public bool IsValidGameFolder(string gamefolder)
+    {
+        bool valid = false;
+        if (File.Exists(Path.Combine(gamefolder, "GAME-INFO.txt")) && File.Exists(Path.Combine(gamefolder, "cover.png")) && File.Exists(Path.Combine(gamefolder, "banner.png")))
+        {
+            string[] gameInfo = GetGameInfoByString(gamefolder);
+            if (File.Exists(Path.Combine(gamefolder, gameInfo[executable])))
+            {
+                valid = true;
+            }
+        }
+        return valid;
+    }
+
+    public string[] GetGameInfoByInt(int requestedInfo)
     {
         return File.ReadAllLines(Path.Combine(gamefolders[requestedInfo], "GAME-INFO.txt"));
+    }
+
+    public string[] GetGameInfoByString(string folderPath)
+    {
+        return File.ReadAllLines(Path.Combine(folderPath, "GAME-INFO.txt"));
     }
 
     public string[] GetFullGameDescription(string[] gameInfo)
@@ -140,7 +157,7 @@ public class NewGameDetector : MonoBehaviour
     {
         selectedGameFolder = index;
 
-        string[] gameInfo = GetGameInfo(selectedGameFolder);
+        string[] gameInfo = GetGameInfoByInt(selectedGameFolder);
         selectedGameInfoExecutable = gameInfo[executable];
         selectedGameInfoName = gameInfo[gameName];
         selectedGameInfoLink = gameInfo[gameLink];
