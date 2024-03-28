@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class GameDetailsButtons : MonoBehaviour
 {
@@ -25,10 +26,11 @@ public class GameDetailsButtons : MonoBehaviour
     }
     public void GameClick()
     {
-        EventSystem.current.SetSelectedGameObject(playButton);
         gameDetails.SetActive(true);
+        highlightButton.GetComponent<ButtenSizer>().DeselectButton();
         gameBrowser.SetActive(false);
         newGameDetector.DisplayGameInfo(EventSystem.current.currentSelectedGameObject.GetComponent<ButtonInfo>().GetIndex());
+        EventSystem.current.SetSelectedGameObject(playButton);
     }
     public void OnGoBack()
     {
@@ -39,6 +41,7 @@ public class GameDetailsButtons : MonoBehaviour
             gameDetails.SetActive(false);
             gameBrowser.SetActive(true);
             upAndDownAnimation.CanNotScrollDown();
+            //SceneManager.LoadScene(1);
         }
     }
     public void CanGoBackToBrowser()
