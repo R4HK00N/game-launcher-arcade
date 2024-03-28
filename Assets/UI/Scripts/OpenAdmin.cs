@@ -44,11 +44,6 @@ public class OpenAdmin : MonoBehaviour
         {
             passwordIsCorrect = true;
         }
-        else if(password.text == adminPassword)
-        {
-            passwordIsCorrect = true;
-        }
-        Debug.Log("can check");
     }
     public void LoginButton()
     {
