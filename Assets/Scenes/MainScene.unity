@@ -1066,6 +1066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036b39eed5063b64b9d807c367035260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newGameDetector: {fileID: 919955450}
 --- !u!114 &85825383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6544,6 +6545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036b39eed5063b64b9d807c367035260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newGameDetector: {fileID: 919955450}
 --- !u!114 &549338840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6639,7 +6641,7 @@ MonoBehaviour:
     m_SelectOnUp: {fileID: 1078431247}
     m_SelectOnDown: {fileID: 1902054967}
     m_SelectOnLeft: {fileID: 85825385}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 1508213259}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -8005,6 +8007,7 @@ MonoBehaviour:
   - {fileID: 1581231263}
   - {fileID: 852296637}
   - {fileID: 1902054963}
+  emptyGameSlotImage: {fileID: 0}
   extraImagePlaceHolder: {fileID: 0}
   bannerImage: {fileID: 0}
   qrImage: {fileID: 0}
@@ -8948,6 +8951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036b39eed5063b64b9d807c367035260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newGameDetector: {fileID: 919955450}
 --- !u!222 &852296636
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10060,6 +10064,7 @@ GameObject:
   m_Component:
   - component: {fileID: 919955451}
   - component: {fileID: 919955450}
+  - component: {fileID: 919955452}
   m_Layer: 0
   m_Name: GameDetector
   m_TagString: Untagged
@@ -10102,6 +10107,7 @@ MonoBehaviour:
   - {fileID: 1581231263}
   - {fileID: 852296637}
   - {fileID: 1902054963}
+  emptyGameSlotImage: {fileID: 2800000, guid: 74884355d1258b742b3c6e6e8fa49309, type: 3}
   extraImagePlaceHolder: {fileID: 21300000, guid: 761be1e086c7bfc45ba401b9808a0e12,
     type: 3}
   bannerImage: {fileID: 1728282439}
@@ -10126,6 +10132,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &919955452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919955449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 7e1123c67f26bf24ea5467523226c198,
+    type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: UICustom
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &932737863
 GameObject:
   m_ObjectHideFlags: 0
@@ -12238,6 +12275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036b39eed5063b64b9d807c367035260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newGameDetector: {fileID: 919955450}
 --- !u!114 &1078431251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17558,7 +17596,7 @@ MonoBehaviour:
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 1078431247}
     m_SelectOnDown: {fileID: 1581231257}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnLeft: {fileID: 549338842}
     m_SelectOnRight: {fileID: 85825385}
   m_Transition: 1
   m_Colors:
@@ -17658,6 +17696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036b39eed5063b64b9d807c367035260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newGameDetector: {fileID: 919955450}
 --- !u!114 &1508213264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18624,7 +18663,7 @@ MonoBehaviour:
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 1508213259}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnLeft: {fileID: 1902054967}
     m_SelectOnRight: {fileID: 852296631}
   m_Transition: 1
   m_Colors:
@@ -18756,6 +18795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036b39eed5063b64b9d807c367035260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newGameDetector: {fileID: 919955450}
 --- !u!222 &1581231262
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22536,6 +22576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036b39eed5063b64b9d807c367035260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newGameDetector: {fileID: 919955450}
 --- !u!114 &1902054967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22554,7 +22595,7 @@ MonoBehaviour:
     m_SelectOnUp: {fileID: 549338842}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 852296631}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 1508213259}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}

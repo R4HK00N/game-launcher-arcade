@@ -29,7 +29,10 @@ public class GameDetailsButtons : MonoBehaviour
         gameDetails.SetActive(true);
         highlightButton.GetComponent<ButtenSizer>().DeselectButton();
         gameBrowser.SetActive(false);
-        newGameDetector.DisplayGameInfo(EventSystem.current.currentSelectedGameObject.GetComponent<ButtonInfo>().GetIndex());
+        if (EventSystem.current.currentSelectedGameObject.GetComponent<ButtonInfo>().GetIndex() != -1)
+        {
+            newGameDetector.DisplayGameInfo(EventSystem.current.currentSelectedGameObject.GetComponent<ButtonInfo>().GetIndex());
+        }
         EventSystem.current.SetSelectedGameObject(playButton);
     }
     public void OnGoBack()

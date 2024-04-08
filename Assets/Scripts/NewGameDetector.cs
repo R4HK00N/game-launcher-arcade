@@ -9,6 +9,7 @@ using System;
 using QRCodeGenerator23;
 using ZXing;
 using ZXing.QrCode;
+using UnityEngine.EventSystems;
 
 public class NewGameDetector : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class NewGameDetector : MonoBehaviour
     int shortDescription = 5;
     int fullDesprictionAlinea = 5;
     [Space(20)]
-    [SerializeField] int selectedGameFolder;
+    public int selectedGameFolder;
     public string selectedGameInfoExecutable;
     public string selectedGameInfoName;
     public string selectedGameInfoLink;
@@ -40,6 +41,7 @@ public class NewGameDetector : MonoBehaviour
     [Header("Browser")]
     [SerializeField] Image highLightedGameCover;
     [SerializeField] List<Image> coverImages;
+    [SerializeField] Texture2D emptyGameSlotImage;
     [Space(20)]
     [Header("Details")]
     public Sprite extraImagePlaceHolder;
@@ -57,6 +59,46 @@ public class NewGameDetector : MonoBehaviour
     {
         RefreshGameLibrary();
         DisplayGameInfo(0);
+    }
+
+    public void OnScrollRight()
+    {
+        if (EventSystem.current.currentSelectedGameObject.TryGetComponent<ButtonInfo>(out ButtonInfo _buttonInfo))
+        {
+            if (_buttonInfo.GetIndex() == 2 || _buttonInfo.GetIndex() == 5)
+            {
+                LoadNextLibraryWindow(_buttonInfo, true);
+            }
+        }
+    }
+
+    public void OnScrollLeft()
+    {
+        if (EventSystem.current.currentSelectedGameObject.TryGetComponent<ButtonInfo>(out ButtonInfo _buttonInfo))
+        {
+            if (_buttonInfo.GetIndex() == 0)
+            {
+                LoadNextLibraryWindow(_buttonInfo , false);
+            }
+        }
+    }
+
+    public void Update()
+    {
+        UnityEngine.Debug.Log(EventSystem.current.currentSelectedGameObject.name);
+        if (EventSystem.current.currentSelectedGameObject.TryGetComponent<ButtonInfo>(out ButtonInfo _buttonInfo))
+        {
+            selectedGameFolder = _buttonInfo.GetIndex();
+        }
+        
+        string[] gameInfo = GetGameInfoByInt(selectedGameFolder);
+        selectedGameInfoExecutable = gameInfo[executable];
+        selectedGameInfoName = gameInfo[gameName];
+        selectedGameInfoLink = gameInfo[gameLink];
+        selectedGameInfoAuthors = gameInfo[authors];
+        selectedGameInfoGenre = gameInfo[genre];
+        selectedGameInfoshortDescription = gameInfo[shortDescription];
+        selectedGameInfoFullDescription = GetFullGameDescription(gameInfo);
     }
 
     public void RefreshGameLibrary()
@@ -155,16 +197,7 @@ public class NewGameDetector : MonoBehaviour
 
     public void DisplayGameInfo(int index)
     {
-        selectedGameFolder = index;
-
-        string[] gameInfo = GetGameInfoByInt(selectedGameFolder);
-        selectedGameInfoExecutable = gameInfo[executable];
-        selectedGameInfoName = gameInfo[gameName];
-        selectedGameInfoLink = gameInfo[gameLink];
-        selectedGameInfoAuthors = gameInfo[authors];
-        selectedGameInfoGenre = gameInfo[genre];
-        selectedGameInfoshortDescription = gameInfo[shortDescription];
-        selectedGameInfoFullDescription = GetFullGameDescription(gameInfo);
+    //    selectedGameFolder = index;
 
         //gamebrowser
         if (gamebrowser.activeSelf)
@@ -174,13 +207,17 @@ public class NewGameDetector : MonoBehaviour
 
             for (int j = 0; j < coverImages.Count; j++)
             {
-                if (j > gamefolders.Count - 1)
+                if (index + j > gamefolders.Count - 1)
                 {
-                    return;
-                }    
-                Texture2D spriteTexture = gamecovers[selectedGameFolder + j];
-                coverImages[j].sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
-                coverImages[j].gameObject.GetComponent<ButtonInfo>().SetIndex(j);
+                    coverImages[j].sprite = Sprite.Create(emptyGameSlotImage, new Rect(0, 0, emptyGameSlotImage.width, emptyGameSlotImage.height), new Vector2(0, 0));
+                    coverImages[j].gameObject.GetComponent<ButtonInfo>().SetIndex(-1);
+                }
+                else
+                {
+                    Texture2D spriteTexture = gamecovers[selectedGameFolder + j];
+                    coverImages[j].sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
+                    coverImages[j].gameObject.GetComponent<ButtonInfo>().SetIndex(j);
+                }
             }
         }
         else if (gamedetails.activeSelf)
@@ -243,9 +280,30 @@ public class NewGameDetector : MonoBehaviour
         }
     }
 
-    public void LoadNextLibraryWindow()
+    public void LoadNextLibraryWindow(ButtonInfo _button, bool _next)
     {
-        DisplayGameInfo(selectedGameFolder + coverImages.Count);
+        if (_next)
+        {
+            int windowIndex = _button.GetIndexInWindow(_button.GetIndex());
+            windowIndex += 1;
+            windowIndex *= gamecovers.Count;
+            windowIndex -= 1;
+            UnityEngine.Debug.Log(windowIndex);
+            selectedGameFolder = windowIndex;
+            DisplayGameInfo(windowIndex);
+        }
+        else
+        {
+            int windowIndex = _button.GetIndexInWindow(_button.GetIndex());
+            UnityEngine.Debug.Log(windowIndex);
+            //windowIndex -= 1;
+            //windowIndex *= gamecovers.Count;
+            //windowIndex -= 1;
+            if (windowIndex > -1)
+            {
+                DisplayGameInfo(windowIndex);
+            }
+        }
     }
 
     public void PlaySelectedGame()

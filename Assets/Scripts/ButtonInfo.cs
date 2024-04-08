@@ -5,6 +5,7 @@ using UnityEngine;
 public class ButtonInfo : MonoBehaviour
 {
     int index = 0;
+    public NewGameDetector newGameDetector;
 
     public void SetIndex(int i)
     {
@@ -14,5 +15,17 @@ public class ButtonInfo : MonoBehaviour
     public int GetIndex()
     {
         return index;
+    }
+
+    public int GetIndexInWindow(int _index)
+    {
+        int result = 0;
+
+        for (int i = _index; i > 5; result++)
+        {
+            _index -= 5;
+        }
+
+        return result;
     }
 }
