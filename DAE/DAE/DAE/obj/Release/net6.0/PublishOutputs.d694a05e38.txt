@@ -1,5 +1,0 @@
-C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\Build\DAE.exe
-C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\Build\DAE.dll
-C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\Build\DAE.deps.json
-C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\Build\DAE.runtimeconfig.json
-C:\Users\schak\Documents\programming\projects\game-launcher-arcade\DAE\Build\DAE.pdb
