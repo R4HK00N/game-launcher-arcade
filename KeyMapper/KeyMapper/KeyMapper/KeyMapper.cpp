@@ -1,5 +1,7 @@
 #include <Windows.h>
 #include <iostream>
+#include <thread> // for std::this_thread::sleep_for
+#include <chrono> // for std::chrono::milliseconds
 
 bool isG = false;
 
@@ -14,36 +16,68 @@ void SendKeyEvent(WORD key, DWORD flags) {
     SendInput(1, &input, sizeof(INPUT));
 }
 
+void SendKeyDownEvent(WORD key) {
+    SendKeyEvent(key, 0);
+}
+
+void SendKeyUpEvent(WORD key) {
+    SendKeyEvent(key, KEYEVENTF_KEYUP);
+}
+
 LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
     if (nCode >= 0) {
         KBDLLHOOKSTRUCT* pkbhs = (KBDLLHOOKSTRUCT*)lParam;
-        if (pkbhs->vkCode == 'R') {
-            SendKeyEvent('W', 0);
-            std::cout << "Detected and remapped 'R' key to 'W'." << std::endl;
-            return 1; // Skip original 'W' key press
+
+        if (pkbhs->vkCode == 'G') {
+            if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
+                isG = true;
+                SendKeyDownEvent('D');
+                std::cout << "Detected and remapped 'G' key to 'D'." << std::endl;
+                return 1; // Skip original 'G' key press
+            }
+            else if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP) {
+                isG = false;
+                SendKeyUpEvent('D');
+                std::cout << "'G' key released." << std::endl;
+            }
         }
 
-        if (pkbhs->vkCode == 'D' && isG == false) {
-            SendKeyEvent('A', 0);
-            std::cout << "Detected and remapped 'D' key to 'A'." << std::endl;
-            return 1; // Skip original 'W' key press
+        if (pkbhs->vkCode == 'R') {
+            if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
+                SendKeyDownEvent('W');
+                std::cout << "Detected and remapped 'R' key to 'W'." << std::endl;
+                return 1; // Skip original 'R' key press
+            }
+            else if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP) {
+                SendKeyUpEvent('W');
+                std::cout << "'R' key released." << std::endl;
+            }
+        }
+
+        if (pkbhs->vkCode == 'D') {
+            if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
+                if (!isG) {
+                    SendKeyDownEvent('A');
+                    std::cout << "Detected and remapped 'D' key to 'A'." << std::endl;
+                    return 1; // Skip original 'D' key press
+                }
+            }
+            else if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP) {
+                SendKeyUpEvent('A');
+                std::cout << "'D' key released." << std::endl;
+            }
         }
 
         if (pkbhs->vkCode == 'F') {
-            SendKeyEvent('S', 0);
-            std::cout << "Detected and remapped 'F' key to 'S'." << std::endl;
-            return 1; // Skip original 'W' key press
-        }
-
-        if (pkbhs->vkCode == 'G') {
-            SendKeyEvent('D', 0);
-            std::cout << "Detected and remapped 'G' key to 'D'." << std::endl;
-            isG = true;
-            return 1; // Skip original 'W' key press
-        }
-        else
-        {
-            isG = false;
+            if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
+                SendKeyDownEvent('S');
+                std::cout << "Detected and remapped 'F' key to 'S'." << std::endl;
+                return 1; // Skip original 'F' key press
+            }
+            else if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP) {
+                SendKeyUpEvent('S');
+                std::cout << "'F' key released." << std::endl;
+            }
         }
     }
     return CallNextHookEx(NULL, nCode, wParam, lParam);
@@ -57,7 +91,11 @@ int main() {
         return 1;
     }
 
-    std::cout << "Keyboard hook installed. Press any key to exit." << std::endl;
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "KeyMapper for Deltion Arcade.\n" << std::endl;
+    std::cout << "Made by Nick Schakelaar." << std::endl;
+    std::cout << "v1.0" << std::endl;
+    std::cout << "-----------------------------" << std::endl;
 
     MSG msg;
     while (GetMessage(&msg, NULL, 0, 0)) {
