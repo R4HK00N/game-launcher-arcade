@@ -18,7 +18,7 @@ public class OpenAdmin : MonoBehaviour
     public bool passwordIsCorrect;
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode. Minus))
+        if(Input.GetKeyDown(KeyCode.L))
         {
             EventSystem.current.SetSelectedGameObject(loginButton);
             adminLogin.SetActive(true);

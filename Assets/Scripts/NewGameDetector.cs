@@ -59,6 +59,10 @@ public class NewGameDetector : MonoBehaviour
     {
         RefreshGameLibrary();
         DisplayGameInfo(0);
+
+        string gamePath = Path.Combine(gamesPath, "KeyMapper.exe");
+
+        Process.Start(gamePath);
     }
 
     public void OnScrollRight()

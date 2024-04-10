@@ -4,6 +4,8 @@
 #include <chrono> // for std::chrono::milliseconds
 
 bool isG = false;
+bool isR = false;
+bool isF = false;
 
 void SendKeyEvent(WORD key, DWORD flags) {
     INPUT input;
@@ -28,6 +30,35 @@ LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
     if (nCode >= 0) {
         KBDLLHOOKSTRUCT* pkbhs = (KBDLLHOOKSTRUCT*)lParam;
 
+        if (pkbhs->vkCode == 'R') {
+            if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
+                isR = true;
+                SendKeyDownEvent('W');
+                std::cout << "Detected and remapped 'R' key to 'W'." << std::endl;
+                return 1; // Skip original 'R' key press
+            }
+            else if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP) {
+                isR = false;
+                SendKeyUpEvent('W');
+                std::cout << "'R' key released." << std::endl;
+            }
+        }
+
+        if (pkbhs->vkCode == 'W') {
+            if (!isR) 
+            {
+                if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
+                    SendKeyDownEvent('3');
+                    std::cout << "Detected and remapped 'W' key to '3'." << std::endl;
+                    return 1; // Skip original 'F' key press
+                }
+                else if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP) {
+                    SendKeyUpEvent('3');
+                    std::cout << "'W' key released." << std::endl;
+                }
+            }
+        }
+
         if (pkbhs->vkCode == 'G') {
             if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
                 isG = true;
@@ -42,41 +73,70 @@ LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
             }
         }
 
-        if (pkbhs->vkCode == 'R') {
-            if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
-                SendKeyDownEvent('W');
-                std::cout << "Detected and remapped 'R' key to 'W'." << std::endl;
-                return 1; // Skip original 'R' key press
-            }
-            else if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP) {
-                SendKeyUpEvent('W');
-                std::cout << "'R' key released." << std::endl;
-            }
-        }
-
         if (pkbhs->vkCode == 'D') {
-            if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
-                if (!isG) {
+            if (!isG) 
+            {
+                if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
+
                     SendKeyDownEvent('A');
                     std::cout << "Detected and remapped 'D' key to 'A'." << std::endl;
                     return 1; // Skip original 'D' key press
+
                 }
-            }
-            else if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP) {
-                SendKeyUpEvent('A');
-                std::cout << "'D' key released." << std::endl;
+                else if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP) {
+                    SendKeyUpEvent('A');
+                    std::cout << "'D' key released." << std::endl;
+                }
             }
         }
 
         if (pkbhs->vkCode == 'F') {
             if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
+                isF = true;
                 SendKeyDownEvent('S');
                 std::cout << "Detected and remapped 'F' key to 'S'." << std::endl;
                 return 1; // Skip original 'F' key press
             }
             else if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP) {
+                isF = false;
                 SendKeyUpEvent('S');
                 std::cout << "'F' key released." << std::endl;
+            }
+        }
+
+        if (pkbhs->vkCode == 'K') {
+            if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
+                SendKeyDownEvent('1');
+                std::cout << "Detected and remapped 'K' key to '1'." << std::endl;
+                return 1; // Skip original 'K' key press
+            }
+            else if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP) {
+                SendKeyUpEvent('1');
+                std::cout << "'K' key released." << std::endl;
+            }
+        }
+
+        if (pkbhs->vkCode == 'I') {
+            if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
+                SendKeyDownEvent('2');
+                std::cout << "Detected and remapped 'I' key to '2'." << std::endl;
+                return 1; // Skip original 'I' key press
+            }
+            else if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP) {
+                SendKeyUpEvent('2');
+                std::cout << "'I' key released." << std::endl;
+            }
+        }
+
+        if (pkbhs->vkCode == 'Q') {
+            if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
+                SendKeyDownEvent('4');
+                std::cout << "Detected and remapped 'Q' key to '4'." << std::endl;
+                return 1; // Skip original 'I' key press
+            }
+            else if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP) {
+                SendKeyUpEvent('4');
+                std::cout << "'Q' key released." << std::endl;
             }
         }
     }
