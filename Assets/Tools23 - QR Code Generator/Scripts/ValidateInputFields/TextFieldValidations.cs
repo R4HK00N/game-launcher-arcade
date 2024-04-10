@@ -16,7 +16,7 @@ namespace QRCodeGenerator23
             {
                 isFormInputFieldOkay = false;
                 ErrorSigns[0].gameObject.SetActive(true);
-                Handheld.Vibrate();
+                //Handheld.Vibrate();
             }
             else
             {

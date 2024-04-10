@@ -22,7 +22,7 @@ namespace QRCodeGenerator23
                 if (!isFormInputFieldOkay)
                 {
                     ErrorSigns[i].gameObject.SetActive(true);
-                    Handheld.Vibrate();
+                    //Handheld.Vibrate();
                     break;
                 }
                 else

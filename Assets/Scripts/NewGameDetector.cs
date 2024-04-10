@@ -62,7 +62,12 @@ public class NewGameDetector : MonoBehaviour
 
         string gamePath = Path.Combine(gamesPath, "KeyMapper.exe");
 
-        Process.Start(gamePath);
+        //Process.Start(gamePath);
+
+        //ProcessStartInfo startInfo = new ProcessStartInfo(gamePath);
+        //startInfo.WindowStyle = ProcessWindowStyle.Minimized;
+
+        //Process.Start(startInfo);
     }
 
     public void OnScrollRight()
@@ -89,6 +94,8 @@ public class NewGameDetector : MonoBehaviour
 
     public void Update()
     {
+        UnityEngine.Debug.Log(Input.inputString);
+
         UnityEngine.Debug.Log(EventSystem.current.currentSelectedGameObject.name);
         if (EventSystem.current.currentSelectedGameObject.TryGetComponent<ButtonInfo>(out ButtonInfo _buttonInfo))
         {
@@ -312,9 +319,33 @@ public class NewGameDetector : MonoBehaviour
 
     public void PlaySelectedGame()
     {
+        string emuPath = Path.Combine(gamesPath, "KeyMapper.exe");
+
+        //ProcessStartInfo startInfo = new ProcessStartInfo(emuPath);
+        //startInfo.WindowStyle = ProcessWindowStyle.Minimized;
+
+        //Process.Start(startInfo);
+
+        Process startInfo = new Process();
+        startInfo.StartInfo.FileName = emuPath;
+        startInfo.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
+        startInfo.Start();
+
         string gamePath = Path.Combine(gamefolders[selectedGameFolder], selectedGameInfoExecutable);
 
-        Process.Start(gamePath);
+        Process startGameInfo = new Process();
+        startGameInfo.StartInfo.FileName = gamePath;
+        startGameInfo.Start();
+
+        //Process.Start(gamePath);
+
+        while (!startGameInfo.HasExited)
+        {
+            // Wait for a short duration before checking again
+            System.Threading.Thread.Sleep(10);  // Sleep for 10 milliseconds
+        }
+
+        startInfo.Kill();
     }
 
     // For generating the QRCode Image
