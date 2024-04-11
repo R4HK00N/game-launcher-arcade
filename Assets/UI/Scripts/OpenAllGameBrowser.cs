@@ -14,7 +14,7 @@ public class OpenAllGameBrowser : MonoBehaviour
     {
         gameBrowser.SetActive(false);
         allGames.SetActive(true);
-        newGameDetector.DisplayGameInfo(0);
         EventSystem.current.SetSelectedGameObject(firstGame);
+        newGameDetector.DisplayGameInfo(0);
     }
 }

@@ -13,7 +13,6 @@ public class OpenAdmin : MonoBehaviour
     public GameObject highlightButton;
     public GameObject gamesButton;
     public TMP_InputField password;
-    string adminPassword = "monke";
     public bool canGoBackAdmin;
     public bool passwordIsCorrect;
     void Update()

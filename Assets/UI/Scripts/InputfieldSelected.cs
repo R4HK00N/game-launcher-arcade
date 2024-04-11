@@ -29,7 +29,7 @@ public class InputfieldSelected : MonoBehaviour
         selectImage.SetActive(false);
         if(searchFunction == true)
         {
-            placeholder.text = "Search game...";
+            placeholder.text = "Select gamefolder...";
             searchField.GetComponent<TMP_InputField>().enabled = false;
             searchFunction = false;
         }
