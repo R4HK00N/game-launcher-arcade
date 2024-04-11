@@ -10,9 +10,11 @@ public class OpenDetailsFromBrowser : MonoBehaviour
     {
         GameObject gameDetails = newGameDetector.gamedetails;
         GameObject gameBrowser = newGameDetector.gamesBrowser;
+        GameObject buttonPressed = this.gameObject;
 
         gameDetails.SetActive(true);
         gameBrowser.SetActive(false);
+        buttonPressed.GetComponent<OnlyButtonSizer>().DeselectButton();
         if (EventSystem.current.currentSelectedGameObject.GetComponent<ButtonInfo>().GetIndex() != -1)
         {
             newGameDetector.DisplayGameInfo(EventSystem.current.currentSelectedGameObject.GetComponent<ButtonInfo>().GetIndex());
