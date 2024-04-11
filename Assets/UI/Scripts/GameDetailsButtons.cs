@@ -11,6 +11,7 @@ public class GameDetailsButtons : MonoBehaviour
     public GameObject gameDetails;
     public GameObject playButton;
     public GameObject highlightButton;
+    public GameObject allGamesButton;
     public UpAndDownAnimation upAndDownAnimation;
     public NewGameDetector newGameDetector;
     public bool goBackToBrowser;
@@ -38,6 +39,7 @@ public class GameDetailsButtons : MonoBehaviour
     public void OnGoBack()
     {
         newGameDetector.ResetExtraImages();
+        allGamesButton.GetComponent<ButtenSizer>().DeselectButton();
 
         if (goBackToBrowser)
         {

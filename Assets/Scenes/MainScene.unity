@@ -18722,6 +18722,7 @@ MonoBehaviour:
   gameDetails: {fileID: 650473882}
   playButton: {fileID: 464760063}
   highlightButton: {fileID: 1078431246}
+  allGamesButton: {fileID: 1387494864}
   upAndDownAnimation: {fileID: 1317456930}
   newGameDetector: {fileID: 919955450}
   goBackToBrowser: 0
