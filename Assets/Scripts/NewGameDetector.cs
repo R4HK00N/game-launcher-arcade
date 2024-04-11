@@ -97,9 +97,7 @@ public class NewGameDetector : MonoBehaviour
 
     public void Update()
     {
-        UnityEngine.Debug.Log(Input.inputString);
-
-        UnityEngine.Debug.Log(EventSystem.current.currentSelectedGameObject.name);
+        //UnityEngine.Debug.Log(EventSystem.current.currentSelectedGameObject.name);
         if (EventSystem.current.currentSelectedGameObject.TryGetComponent<ButtonInfo>(out ButtonInfo _buttonInfo))
         {
             selectedGameFolder = _buttonInfo.GetIndex();
@@ -234,16 +232,14 @@ public class NewGameDetector : MonoBehaviour
         }
         else if (gamesBrowser.activeSelf)
         {
-            Texture2D spriteTextureOfHighlight = gamecovers[selectedGameFolder];
-            highLightedGameCover.sprite = Sprite.Create(spriteTextureOfHighlight, new Rect(0, 0, spriteTextureOfHighlight.width, spriteTextureOfHighlight.height), new Vector2(0, 0));
-
-            for (int j = 0; j < gamefolders.Count - 1; j++)
+            for (int j = 0; j <= gamefolders.Count; j++)
             {
                 Image _gameButton = GameObject.FindFirstObjectByType<ButtonInfo>().gameObject.GetComponent<Image>();
                 if (j != 0)
                 {
                     GameObject _newButton = Instantiate(gameButton, Vector3.zero, Quaternion.identity);
                     _newButton.transform.SetParent(gameButtonParent.transform);
+                    _newButton.GetComponent<ButtonInfo>().newGameDetector = this;
                 }
                 Texture2D spriteTexture = gamecovers[selectedGameFolder + j];
                 _gameButton.sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
