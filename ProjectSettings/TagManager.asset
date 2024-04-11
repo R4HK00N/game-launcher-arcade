@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - GameButton
+  - Details
+  - Browser
+  - PlayButton
   layers:
   - Default
   - TransparentFX

@@ -35,9 +35,10 @@ public class NewGameDetector : MonoBehaviour
     public string[] selectedGameInfoFullDescription;
     public List<Texture2D> selectedGameExtraImages;
     [Space(20)]
-    [SerializeField] GameObject mainPage;
-    [SerializeField] GameObject gamesBrowser;
-    [SerializeField] GameObject gamedetails;
+    public GameObject mainPage;
+    public GameObject gamesBrowser;
+    public GameObject gamedetails;
+    public GameObject playButton;
     [Space(20)]
     [Header("Browser")]
     [SerializeField] Image highLightedGameCover;
@@ -232,16 +233,16 @@ public class NewGameDetector : MonoBehaviour
         }
         else if (gamesBrowser.activeSelf)
         {
-            for (int j = 0; j <= gamefolders.Count; j++)
+            for (int j = 0; j < gamefolders.Count; j++)
             {
-                Image _gameButton = GameObject.FindFirstObjectByType<ButtonInfo>().gameObject.GetComponent<Image>();
-                if (j != 0)
-                {
-                    GameObject _newButton = Instantiate(gameButton, Vector3.zero, Quaternion.identity);
-                    _newButton.transform.SetParent(gameButtonParent.transform);
-                    _newButton.GetComponent<ButtonInfo>().newGameDetector = this;
-                }
-                Texture2D spriteTexture = gamecovers[selectedGameFolder + j];
+
+                GameObject _newButton = Instantiate(gameButton, Vector3.zero, Quaternion.identity);
+                _newButton.transform.SetParent(gameButtonParent.transform);
+                _newButton.GetComponent<ButtonInfo>().newGameDetector = this;
+                _newButton.GetComponent<OpenDetailsFromBrowser>().newGameDetector = this;
+                Image _gameButton = _newButton.GetComponent<Image>();
+
+                Texture2D spriteTexture = gamecovers[j];
                 _gameButton.sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
                 _gameButton.gameObject.GetComponent<ButtonInfo>().SetIndex(j);
             }
