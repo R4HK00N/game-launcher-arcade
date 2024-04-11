@@ -35,13 +35,16 @@ public class NewGameDetector : MonoBehaviour
     public string[] selectedGameInfoFullDescription;
     public List<Texture2D> selectedGameExtraImages;
     [Space(20)]
-    [SerializeField] GameObject gamebrowser;
+    [SerializeField] GameObject mainPage;
+    [SerializeField] GameObject gamesBrowser;
     [SerializeField] GameObject gamedetails;
     [Space(20)]
     [Header("Browser")]
     [SerializeField] Image highLightedGameCover;
     [SerializeField] List<Image> coverImages;
     [SerializeField] Texture2D emptyGameSlotImage;
+    [SerializeField] GameObject gameButton;
+    [SerializeField] GameObject gameButtonParent;
     [Space(20)]
     [Header("Details")]
     public Sprite extraImagePlaceHolder;
@@ -70,27 +73,27 @@ public class NewGameDetector : MonoBehaviour
         //Process.Start(startInfo);
     }
 
-    public void OnScrollRight()
-    {
-        if (EventSystem.current.currentSelectedGameObject.TryGetComponent<ButtonInfo>(out ButtonInfo _buttonInfo))
-        {
-            if (_buttonInfo.GetIndex() == 2 || _buttonInfo.GetIndex() == 5)
-            {
-                LoadNextLibraryWindow(_buttonInfo, true);
-            }
-        }
-    }
+    //public void OnScrollRight()
+    //{
+    //    if (EventSystem.current.currentSelectedGameObject.TryGetComponent<ButtonInfo>(out ButtonInfo _buttonInfo))
+    //    {
+    //        if (_buttonInfo.GetIndex() == 2 || _buttonInfo.GetIndex() == 5)
+    //        {
+    //            LoadNextLibraryWindow(_buttonInfo, true);
+    //        }
+    //    }
+    //}
 
-    public void OnScrollLeft()
-    {
-        if (EventSystem.current.currentSelectedGameObject.TryGetComponent<ButtonInfo>(out ButtonInfo _buttonInfo))
-        {
-            if (_buttonInfo.GetIndex() == 0)
-            {
-                LoadNextLibraryWindow(_buttonInfo , false);
-            }
-        }
-    }
+    //public void OnScrollLeft()
+    //{
+    //    if (EventSystem.current.currentSelectedGameObject.TryGetComponent<ButtonInfo>(out ButtonInfo _buttonInfo))
+    //    {
+    //        if (_buttonInfo.GetIndex() == 0)
+    //        {
+    //            LoadNextLibraryWindow(_buttonInfo , false);
+    //        }
+    //    }
+    //}
 
     public void Update()
     {
@@ -208,10 +211,8 @@ public class NewGameDetector : MonoBehaviour
 
     public void DisplayGameInfo(int index)
     {
-    //    selectedGameFolder = index;
-
         //gamebrowser
-        if (gamebrowser.activeSelf)
+        if (mainPage.activeSelf)
         {
             Texture2D spriteTextureOfHighlight = gamecovers[selectedGameFolder];
             highLightedGameCover.sprite = Sprite.Create(spriteTextureOfHighlight, new Rect(0, 0, spriteTextureOfHighlight.width, spriteTextureOfHighlight.height), new Vector2(0, 0));
@@ -229,6 +230,24 @@ public class NewGameDetector : MonoBehaviour
                     coverImages[j].sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
                     coverImages[j].gameObject.GetComponent<ButtonInfo>().SetIndex(j);
                 }
+            }
+        }
+        else if (gamesBrowser.activeSelf)
+        {
+            Texture2D spriteTextureOfHighlight = gamecovers[selectedGameFolder];
+            highLightedGameCover.sprite = Sprite.Create(spriteTextureOfHighlight, new Rect(0, 0, spriteTextureOfHighlight.width, spriteTextureOfHighlight.height), new Vector2(0, 0));
+
+            for (int j = 0; j < gamefolders.Count - 1; j++)
+            {
+                Image _gameButton = GameObject.FindFirstObjectByType<ButtonInfo>().gameObject.GetComponent<Image>();
+                if (j != 0)
+                {
+                    GameObject _newButton = Instantiate(gameButton, Vector3.zero, Quaternion.identity);
+                    _newButton.transform.SetParent(gameButtonParent.transform);
+                }
+                Texture2D spriteTexture = gamecovers[selectedGameFolder + j];
+                _gameButton.sprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0));
+                _gameButton.gameObject.GetComponent<ButtonInfo>().SetIndex(j);
             }
         }
         else if (gamedetails.activeSelf)
@@ -291,31 +310,31 @@ public class NewGameDetector : MonoBehaviour
         }
     }
 
-    public void LoadNextLibraryWindow(ButtonInfo _button, bool _next)
-    {
-        if (_next)
-        {
-            int windowIndex = _button.GetIndexInWindow(_button.GetIndex());
-            windowIndex += 1;
-            windowIndex *= gamecovers.Count;
-            windowIndex -= 1;
-            UnityEngine.Debug.Log(windowIndex);
-            selectedGameFolder = windowIndex;
-            DisplayGameInfo(windowIndex);
-        }
-        else
-        {
-            int windowIndex = _button.GetIndexInWindow(_button.GetIndex());
-            UnityEngine.Debug.Log(windowIndex);
-            //windowIndex -= 1;
-            //windowIndex *= gamecovers.Count;
-            //windowIndex -= 1;
-            if (windowIndex > -1)
-            {
-                DisplayGameInfo(windowIndex);
-            }
-        }
-    }
+    //public void LoadNextLibraryWindow(ButtonInfo _button, bool _next)
+    //{
+    //    if (_next)
+    //    {
+    //        int windowIndex = _button.GetIndexInWindow(_button.GetIndex());
+    //        windowIndex += 1;
+    //        windowIndex *= gamecovers.Count;
+    //        windowIndex -= 1;
+    //        UnityEngine.Debug.Log(windowIndex);
+    //        selectedGameFolder = windowIndex;
+    //        DisplayGameInfo(windowIndex);
+    //    }
+    //    else
+    //    {
+    //        int windowIndex = _button.GetIndexInWindow(_button.GetIndex());
+    //        UnityEngine.Debug.Log(windowIndex);
+    //        //windowIndex -= 1;
+    //        //windowIndex *= gamecovers.Count;
+    //        //windowIndex -= 1;
+    //        if (windowIndex > -1)
+    //        {
+    //            DisplayGameInfo(windowIndex);
+    //        }
+    //    }
+    //}
 
     public void PlaySelectedGame()
     {
