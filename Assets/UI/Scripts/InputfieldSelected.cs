@@ -15,7 +15,8 @@ public class InputfieldSelected : MonoBehaviour
     {
         selectImage.SetActive(true);
         EventSystem.current.SetSelectedGameObject(inputfield);
-        if(searchFunction == true)
+        searchField.GetComponent<TMP_InputField>().enabled = true;
+        if (searchFunction == true)
         {
             searchField.GetComponent<TMP_InputField>().enabled = true;
         }
