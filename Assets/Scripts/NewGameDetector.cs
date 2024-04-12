@@ -46,6 +46,7 @@ public class NewGameDetector : MonoBehaviour
     [SerializeField] Texture2D emptyGameSlotImage;
     [SerializeField] GameObject gameButton;
     [SerializeField] GameObject gameButtonParent;
+    public List<GameObject> allGamesAllButtons = new List<GameObject>();
     [Space(20)]
     [Header("Details")]
     public Sprite extraImagePlaceHolder;
@@ -233,10 +234,17 @@ public class NewGameDetector : MonoBehaviour
         }
         else if (gamesBrowser.activeSelf)
         {
+            for (int p = 0; p < allGamesAllButtons.Count; p++)
+            {
+                Destroy(allGamesAllButtons[p]);
+            }
+
+            allGamesAllButtons.Clear();
+
             for (int j = 0; j < gamefolders.Count; j++)
             {
-
                 GameObject _newButton = Instantiate(gameButton, Vector3.zero, Quaternion.identity);
+                allGamesAllButtons.Add(_newButton);
                 _newButton.transform.SetParent(gameButtonParent.transform);
                 _newButton.GetComponent<ButtonInfo>().newGameDetector = this;
                 _newButton.GetComponent<OpenDetailsFromBrowser>().newGameDetector = this;
@@ -403,6 +411,23 @@ public class NewGameDetector : MonoBehaviour
         {
             spawnedExtraImageGameObjects.Remove(spawnedImageHolder);
             Destroy(spawnedImageHolder);
+        }
+    }
+
+    public void SortGames(GameObject _button)
+    {
+        DisplayGameInfo(0);
+
+        for (int p = 0; p < allGamesAllButtons.Count; p++)
+        {
+            int _index = allGamesAllButtons[p].GetComponent<ButtonInfo>().GetIndex();
+            string[] gameInfo = GetGameInfoByInt(_index);
+            string _genre = gameInfo[genre];
+
+            if (_button.name != _genre)
+            {
+                Destroy(allGamesAllButtons[p]);
+            }
         }
     }
 }
